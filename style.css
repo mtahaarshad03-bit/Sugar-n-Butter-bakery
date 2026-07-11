@@ -1,0 +1,606 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --burgundy: #6b1e3f;
+    --burgundy-dark: #4a1428;
+    --gold: #d4af37;
+    --gold-light: #e8c968;
+    --cream: #faf3e7;
+    --cream-dark: #f0e5d1;
+    --espresso: #2c1810;
+    --whatsapp-green: #25d366;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(107, 30, 63, 0.06) 0%, transparent 50%);
+    color: var(--espresso);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* --- WhatsApp Floating Button --- */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: var(--whatsapp-green);
+    color: white;
+    padding: 14px 24px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+    z-index: 5000;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid white;
+}
+.whatsapp-float:hover {
+    transform: scale(1.08) translateY(-5px);
+    box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
+}
+
+/* --- Luxury Basket --- */
+.cart-basket {
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    background: linear-gradient(135deg, var(--burgundy), var(--burgundy-dark));
+    color: var(--gold);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 2000;
+    box-shadow: 0 10px 30px rgba(107, 30, 63, 0.4), 0 0 0 3px var(--gold);
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: basketFloat 3s ease-in-out infinite;
+    border: 2px solid var(--gold);
+}
+@keyframes basketFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+.cart-basket:hover { transform: scale(1.1); }
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--gold);
+    color: var(--burgundy-dark);
+    font-size: 0.85rem;
+    padding: 5px 11px;
+    border-radius: 50%;
+    font-weight: 700;
+    border: 2px solid var(--cream);
+    font-family: 'Inter', sans-serif;
+}
+
+.flying-item {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 25px var(--gold);
+    z-index: 9999;
+    pointer-events: none;
+    transition: all 0.8s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+/* --- Elegant Navigation --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 5%;
+    background: rgba(250, 243, 231, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 2px 20px rgba(44, 24, 16, 0.05);
+}
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+.nav-logo-text {
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(135deg, var(--burgundy), var(--burgundy-dark));
+    color: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    border: 2px solid var(--gold);
+    box-shadow: 0 5px 15px rgba(107, 30, 63, 0.3);
+}
+.nav-logo-text span { color: var(--gold-light); font-style: italic; }
+.brand-logo h2 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--burgundy);
+    letter-spacing: 3px;
+}
+.nav-links a {
+    text-decoration: none;
+    color: var(--espresso);
+    font-weight: 500;
+    margin-left: 25px;
+    font-size: 0.85rem;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+}
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--burgundy); }
+.nav-links a:hover::after { width: 100%; }
+
+/* --- Hero Section --- */
+.hero {
+    height: 90vh;
+    background: 
+        linear-gradient(135deg, rgba(74, 20, 40, 0.85), rgba(44, 24, 16, 0.75)),
+        url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1600') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+}
+.hero-content { position: relative; z-index: 2; padding: 20px; }
+.hero-tagline {
+    display: inline-block;
+    color: var(--gold);
+    letter-spacing: 5px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5.5rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    line-height: 1.1;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+.hero h1 em {
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 500;
+}
+.hero p {
+    font-size: 1.1rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    color: var(--cream-dark);
+}
+
+/* --- Container (Glass Card) --- */
+.container {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 60px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 30px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 25px 60px rgba(107, 30, 63, 0.08);
+}
+
+/* --- Section Header --- */
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.section-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: var(--burgundy);
+    margin: 20px 0 10px;
+    font-weight: 700;
+}
+.section-header p {
+    color: var(--espresso);
+    opacity: 0.7;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+.gold-divider {
+    display: inline-block;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* --- Section Animations --- */
+.section-visible { animation: fadeIn 0.8s ease forwards; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+}
+
+/* --- Reveal Animation --- */
+@keyframes revealItem {
+    0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.reveal-anim {
+    opacity: 0;
+    animation: revealItem 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* --- Luxury Category Cards --- */
+.cat-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(44, 24, 16, 0.08);
+}
+.cat-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px rgba(107, 30, 63, 0.2);
+    border-color: var(--gold);
+}
+.cat-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+.cat-card:hover img { transform: scale(1.1); }
+
+.card-overlay {
+    padding: 25px 20px;
+    text-align: center;
+    background: white;
+    position: relative;
+}
+.card-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+}
+.cat-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--burgundy);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+.view-btn {
+    color: var(--gold);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.cat-card:hover .view-btn { color: var(--burgundy); letter-spacing: 3px; }
+
+/* --- Inputs --- */
+input, select, textarea {
+    width: 100%;
+    padding: 16px 20px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--espresso);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+/* --- Buttons --- */
+.order-btn, .order-btn-sm {
+    background: linear-gradient(135deg, var(--burgundy), var(--burgundy-dark));
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(107, 30, 63, 0.3);
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
+}
+.order-btn:hover, .order-btn-sm:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy));
+    box-shadow: 0 12px 30px rgba(107, 30, 63, 0.5);
+    color: var(--gold-light);
+}
+.order-btn-sm {
+    padding: 10px 22px;
+    font-size: 0.75rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background: transparent;
+    color: var(--burgundy);
+    border: 1px solid var(--burgundy);
+    padding: 10px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 15px;
+    transition: 0.3s;
+    font-family: 'Inter', sans-serif;
+}
+.back-btn:hover {
+    background: var(--burgundy);
+    color: var(--gold);
+}
+
+/* --- Info Cards (Delivery) --- */
+.info-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+.info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+}
+.info-row:last-child { border-bottom: none; }
+.info-row.highlight {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(107, 30, 63, 0.05));
+    margin: 10px -20px;
+    padding: 18px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--gold);
+}
+.info-icon {
+    font-size: 1.8rem;
+    min-width: 40px;
+}
+.info-row strong { color: var(--burgundy); display: block; margin-bottom: 4px; }
+
+/* --- Contact Grid --- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+.contact-card {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transition: 0.3s;
+}
+.contact-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--gold);
+    box-shadow: 0 15px 35px rgba(107, 30, 63, 0.1);
+}
+.contact-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+.contact-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--burgundy);
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+.contact-card p { color: var(--espresso); font-size: 0.95rem; }
+
+/* --- Invoice Modal --- */
+.invoice-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(44, 24, 16, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 4000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.invoice-box {
+    background: var(--cream);
+    padding: 40px;
+    border-radius: 25px;
+    max-width: 500px;
+    width: 100%;
+    border: 2px solid var(--gold);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+}
+.invoice-header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--gold);
+    margin-bottom: 25px;
+}
+.invoice-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--burgundy);
+    font-size: 1.8rem;
+}
+.invoice-header span {
+    color: var(--gold);
+    letter-spacing: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+#invoice-content p {
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+    font-size: 0.95rem;
+}
+#invoice-content strong { color: var(--burgundy); }
+.invoice-status {
+    text-align: center;
+    padding: 12px;
+    background: rgba(212, 175, 55, 0.15);
+    color: var(--burgundy);
+    border-radius: 10px;
+    margin-top: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.confirm-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--burgundy), var(--burgundy-dark));
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 16px;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: 0.3s;
+    font-family: 'Inter', sans-serif;
+}
+.confirm-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(107, 30, 63, 0.4);
+}
+
+/* --- Success Toast --- */
+.success-toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: var(--cream);
+    border: 2px solid var(--gold);
+    padding: 45px 40px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    z-index: 5000;
+    display: none;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 90%;
+    max-width: 400px;
+}
+.success-toast.active {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+.success-circle {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: var(--burgundy-dark);
+    font-size: 35px;
+    font-weight: bold;
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+}
+.success-toast h3 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--burgundy);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+/* --- Mobile Responsive --- */
+@media screen and (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 3rem; }
+    .hero p { font-size: 0.9rem; letter-spacing: 2px; }
+    .container { padding: 30px 20px; margin: 30px 15px; }
+    .section-header h2 { font-size: 2.2rem; }
+    .whatsapp-float {
+        padding: 12px;
+        bottom: 20px;
+        left: 20px;
+    }
+    .whatsapp-float span { display: none; }
+    .cart-basket {
+        width: 60px;
+        height: 60px;
+        top: 90px;
+        right: 20px;
+    }
+}

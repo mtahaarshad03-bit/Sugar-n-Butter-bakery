@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sugar N Butter Bakery | Premium Portal</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/15551438238" target="_blank" class="whatsapp-float">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:22px;height:22px;">
+    <span>Order on WhatsApp</span>
+</a>
+
+<!-- Neon Floating Basket -->
+<div class="cart-basket" onclick="showSection('order')">
+    🛒 <span id="cart-count">0</span>
+</div>
+
+<!-- Navigation -->
+<nav>
+    <div class="brand-logo" onclick="showSection('home')">
+        <div class="nav-logo-text">S<span>&</span>B</div>
+        <div>
+            <h2 style="margin:0;font-size:1.2rem;letter-spacing:2px;">SUGAR n BUTTER</h2>
+            <small style="letter-spacing:3px;font-size:0.65rem;color:var(--gold);">ARTISAN BAKERY</small>
+        </div>
+    </div>
+    <div class="nav-links">
+        <a href="#" onclick="showSection('home')">Home</a>
+        <a href="#" onclick="showSection('menu')">Menu</a>
+        <a href="#" onclick="showSection('order')">Order</a>
+        <a href="#" onclick="showSection('delivery')">Delivery</a>
+        <a href="#" onclick="showSection('contact')">Contact</a>
+    </div>
+</nav>
+
+<!-- HOME SECTION -->
+<section id="home" class="section-visible">
+    <div class="hero">
+        <div class="hero-content">
+            <span class="hero-tagline">— Est. Sargodha —</span>
+            <h1>Sugar N Butter<br><em>Bakery</em></h1>
+            <p>Sargodha's Finest Artisan Treats</p>
+            <button class="order-btn" onclick="showSection('menu')">Explore Menu</button>
+        </div>
+    </div>
+</section>
+
+<!-- MENU / ITEMS DISPLAY -->
+<section id="menu" style="display:none;">
+    <div class="container">
+        <div class="section-header">
+            <span class="gold-divider"></span>
+            <h2>Full Menu</h2>
+            <p>Browse our exquisite collection</p>
+        </div>
+        <div class="category-grid">
+            <div class="cat-card" onclick="renderVarieties('Chocolate ')">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500" alt="Chocolate">
+                <div class="card-overlay"><h3>Chocolate</h3><span class="view-btn">Explore →</span></div>
+            </div>
+            <div class="cat-card" onclick="renderVarieties('Strawberry ')">
+                <img src="https://images.unsplash.com/photo-1464347744102-11db6282f854?w=500" alt="Strawberry">
+                <div class="card-overlay"><h3>Strawberry</h3><span class="view-btn">Explore →</span></div>
+            </div>
+            <div class="cat-card" onclick="renderVarieties('Birthday ')">
+                <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=500" alt="Birthday">
+                <div class="card-overlay"><h3>Birthday</h3><span class="view-btn">Explore →</span></div>
+            </div>
+            <div class="cat-card" onclick="renderVarieties('Cupcake ')">
+                <img src="https://images.unsplash.com/photo-1519869325930-281384150729?w=500" alt="Cupcake">
+                <div class="card-overlay"><h3>Cupcakes</h3><span class="view-btn">Explore →</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ITEMS DISPLAY -->
+ <section id="items-display" style="display:none;">
+    <div class="container">
+        <div class="section-header">
+            <span class="gold-divider"></span>
+            <h2 id="cat-title">Collection</h2>
+            <button class="back-btn" onclick="showSection('menu')">← Back to Menu</button>
+        </div>
+        <div class="category-grid" id="product-list-grid"></div>
+    </div>
+</section>
+
+<!-- DELIVERY -->
+<section id="delivery" style="display:none;">
+    <div class="container">
+        <div class="section-header">
+            <span class="gold-divider"></span>
+            <h2>🚚 Delivery Guidelines</h2>
+        </div>
+        <div class="info-card">
+            <div class="info-row"><span class="info-icon">📍</span><div><strong>Service Areas:</strong> All major sectors of Sargodha, including Shalimar City and PAF Road.</div></div>
+            <div class="info-row"><span class="info-icon">⏰</span><div><strong>Delivery Time:</strong> Freshly baked within 60–90 minutes.</div></div>
+            <div class="info-row"><span class="info-icon">💰</span><div><strong>Standard Charges:</strong> Rs. 150</div></div>
+            <div class="info-row highlight"><span class="info-icon">🎁</span><div><strong>Special Offer:</strong> FREE Delivery on orders above Rs. 2000.</div></div>
+            <div class="info-row"><span class="info-icon">🏪</span><div><strong>Self-Pickup:</strong> Available at our main kitchen in Shalimar City.</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="display:none;">
+    <div class="container">
+        <div class="section-header">
+            <span class="gold-divider"></span>
+            <h2>📞 Contact Details</h2>
+            <p>Sugar N Butter Bakery</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-card"><div class="contact-icon">📱</div><h4>Phone / WhatsApp</h4><p>+92 308 8369321</p></div>
+            <div class="contact-card"><div class="contact-icon">✉️</div><h4>Official Email</h4><p>mtaha22220@gmail.com</p></div>
+            <div class="contact-card"><div class="contact-icon">📍</div><h4>Location</h4><p>Shalimar City, Sargodha</p></div>
+            <div class="contact-card"><div class="contact-icon">🕐</div><h4>Hours</h4><p>10:00 AM - 10:00 PM</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ORDER -->
+<section id="order" style="display:none;">
+    <div class="container">
+        <div class="section-header">
+            <span class="gold-divider"></span>
+            <h2>Checkout Details</h2>
+            <p>Place your premium order</p>
+        </div>
+        <form onsubmit="event.preventDefault(); submitOrder();">
+            <input type="text" id="cust-name" placeholder="Full Name" required>
+            <input type="email" id="cust-email" placeholder="Email Address" required>
+            <input type="tel" id="cust-phone" placeholder="Phone Number" required>
+            <textarea id="cust-address" placeholder="Delivery Address" rows="3" required></textarea>
+            <input type="date" id="cust-date" required>
+            <select id="cake-select" disabled></select>
+            <button type="submit" class="order-btn">Place Premium Order</button>
+        </form>
+    </div>
+</section>
+
+<!-- INVOICE MODAL -->
+<div id="invoice-modal" class="invoice-modal">
+    <div class="invoice-box">
+        <div class="invoice-header">
+            <h2>Sugar n Butter Bakery</h2>
+            <span>INVOICE</span>
+        </div>
+        <div id="invoice-content"></div>
+        <div class="invoice-status">Unpaid (Cash on Delivery)</div>
+        <button class="confirm-btn" onclick="finalConfirmation()">Confirm Order ✓</button>
+    </div>
+</div>
+
+<!-- SUCCESS TOAST -->
+<div id="order-success-toast" class="success-toast">
+    <div class="success-circle">✓</div>
+    <h3>Order Confirmed!</h3>
+    <p>Confirmation will be sent to your email</p>
+</div>
+
+ <script src="script.js"></script>
+    <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2026/04/10/11/20260410111951-MXDJ4SZY.js" defer></script>
+</body>
+</html>
