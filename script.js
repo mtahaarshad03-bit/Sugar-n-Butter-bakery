@@ -85,7 +85,7 @@ function addToCartAnimation(event, name, price) {
     const basket = document.querySelector('.cart-basket');
     const btn = event.currentTarget;
     const flyer = document.createElement('div');
-    flyer.className = 'flying-item';
+     flyer.className = 'flying-item';
     
     const rect = btn.getBoundingClientRect();
     flyer.style.left = rect.left + 'px';
@@ -114,7 +114,12 @@ function addToCart(name, price) {
 }
 
 function updateCartUI() {
-    document.getElementById('cart-count').innerText = cart.length;
+    // Check if cart-count element exists before writing to it
+    const cartCountEl = document.getElementById('cart-count');
+    if (cartCountEl) {
+        cartCountEl.innerText = cart.length;
+    }
+
     const select = document.getElementById('cake-select');
     const totalBill = cart.reduce((sum, item) => sum + item.price, 0);
     
@@ -138,7 +143,7 @@ function updateCartUI() {
     }
 }
 
-// SUBMIT ORDER (Aapka Original Logic)
+// SUBMIT ORDER (Aapka Original Logic - Handles Form Data & Modal Popup)
 async function submitOrder() {
     const name = document.getElementById('cust-name').value;
     const email = document.getElementById('cust-email').value;
@@ -154,12 +159,20 @@ async function submitOrder() {
     const totalBill = cart.reduce((sum, item) => sum + item.price, 0);
     const itemsList = cart.map(i => i.name).join(", ");
     
+    // Save order data into global variable for finalConfirmation()
     tempOrderPayload = { 
-        name, email, phone, item: itemsList, 
-        qty: cart.length, bill: totalBill, 
-        address, date, timestamp: new Date().toLocaleString() 
+        name, 
+        email, 
+        phone, 
+        item: itemsList, 
+        qty: cart.length, 
+        bill: totalBill, 
+        address, 
+        date, 
+        timestamp: new Date().toLocaleString() 
     };
     
+    // Populating Invoice Modal with order data
     document.getElementById('invoice-content').innerHTML = `
         <p><strong>Customer:</strong> ${name}</p>
         <p><strong>Phone:</strong> ${phone}</p>
@@ -171,29 +184,45 @@ async function submitOrder() {
     document.getElementById('invoice-modal').style.display = 'flex';
 }
 
-// ✅ FINAL CONFIRMATION (Aapka Original logic with Toast)
+// ✅ FINAL CONFIRMATION (Merged with Direct n8n Webhook Endpoint)
 async function finalConfirmation() {
     try {
+        // Direct Post Request to live n8n webhook (No Python local backend needed!)
         const response = await fetch('https://tom321.app.n8n.cloud/webhook/e8db3c47-3c7e-4525-a84a-43c9a2a760c3/place-order', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(tempOrderPayload)
         });
         
-        if(response.ok) {
+        if (response.ok) {
+            // Close Invoice Modal
             document.getElementById('invoice-modal').style.display = 'none';
+            
+            // Trigger Luxury Toast Success Animation
             const toast = document.getElementById('order-success-toast');
-            toast.classList.add('active');
-            setTimeout(() => {
-                toast.classList.remove('active');
-                cart = []; 
+            if (toast) {
+                toast.classList.add('active');
+                setTimeout(() => {
+                    toast.classList.remove('active');
+                    // Reset cart and UI
+                    cart = []; 
+                    updateCartUI();
+                    showSection('home');
+                }, 3000);
+            } else {
+                // Fallback if toast element isn't found in HTML
+                alert("Order Success! Processed directly to n8n.");
+                cart = [];
                 updateCartUI();
                 showSection('home');
-            }, 3000);
+            }
         } else {
-            alert("Order failed! Please try again.");
+            alert("n8n received the request but returned an error. Please try again.");
         }
     } catch(e) {
-        alert("Backend connection error!");
+        console.error("Connection Error: ", e);
+        alert("Could not connect to n8n Webhook! Check your internet connection.");
     }
 }
