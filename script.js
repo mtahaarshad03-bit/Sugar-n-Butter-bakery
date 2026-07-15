@@ -188,7 +188,8 @@ async function submitOrder() {
 async function finalConfirmation() {
     try {
         // Direct Post Request to live n8n webhook (No Python local backend needed!)
-        const response = await fetch('https://tom321.app.n8n.cloud/webhook/e8db3c47-3c7e-4525-a84a-43c9a2a760c3/place-order', {
+        // Pehle wale URL se aakhri ka "/place-order" hata kar yeh likhein:
+const response = await fetch('https://tom321.app.n8n.cloud/webhook/e8db3c47-3c7e-4525-a84a-43c9a2a760c3', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
