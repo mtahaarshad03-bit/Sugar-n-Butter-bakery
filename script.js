@@ -174,7 +174,7 @@ async function submitOrder() {
 // ✅ FINAL CONFIRMATION (Aapka Original logic with Toast)
 async function finalConfirmation() {
     try {
-        const response = await fetch('http://127.0.0.1:5000/place-order', {
+        const response = await fetch('https://tom321.app.n8n.cloud/webhook/e8db3c47-3c7e-4525-a84a-43c9a2a760c3/place-order', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(tempOrderPayload)
